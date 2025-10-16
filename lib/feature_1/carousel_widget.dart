@@ -14,8 +14,8 @@ class Carousel extends StatefulWidget {
   final Color inactiveDotColor;
   final bool enableScaleEffect;
   final bool enableParallax;
-  final double scaleFactor; // smaller = more shrink
-  final double parallaxOffset; // larger = more movement
+  final double scaleFactor;
+  final double parallaxOffset;
   final Function(int)? onPageChanged;
 
   const Carousel({
@@ -33,7 +33,7 @@ class Carousel extends StatefulWidget {
     this.enableScaleEffect = true,
     this.enableParallax = true,
     this.scaleFactor = 0.2,
-    this.parallaxOffset = 30,
+    this.parallaxOffset = 50,
     this.onPageChanged,
   });
 
@@ -120,12 +120,10 @@ class _CarouselState extends State<Carousel> {
                     offset = value * widget.parallaxOffset;
                   }
 
-                  // scale effect
                   double scale = widget.enableScaleEffect
                       ? (1 - (value.abs() * widget.scaleFactor)).clamp(0.8, 1.0)
                       : 1.0;
 
-                  // parallax effect
                   double translation = widget.enableParallax ? -offset : 0.0;
 
                   return Transform.translate(
@@ -136,7 +134,10 @@ class _CarouselState extends State<Carousel> {
                     ),
                   );
                 },
-                child: widget.items[index],
+                child: Semantics(
+                  label: 'Carousel ${index + 1} element',
+                  child: widget.items[index],
+                ),
               );
             },
           ),
@@ -157,7 +158,7 @@ class _CarouselState extends State<Carousel> {
                 decoration: BoxDecoration(
                   color: isActive
                       ? widget.activeDotColor
-                      : widget.inactiveDotColor.withOpacity(0.4),
+                      : widget.inactiveDotColor.withValues(alpha: 0.4),
                   borderRadius: BorderRadius.circular(4),
                 ),
               );

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:itodev_task/home_page.dart';
+import 'package:itodev_task/core/injection.dart';
+import 'package:itodev_task/home/home_page.dart';
 
 void main() {
+  configureDependencies();
   runApp(const MyApp());
 }
 

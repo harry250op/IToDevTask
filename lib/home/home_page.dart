@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:itodev_task/feature_1/example_carousel_page.dart';
+import 'package:itodev_task/feature_2/presentation/accelometer_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -23,6 +24,12 @@ class HomePage extends StatelessWidget {
               MaterialPageRoute(builder: (context) => ExampleCarouselPage()),
             ),
             child: Text('Go to Carousel Example'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => AccelerometerPage()),
+            ),
+            child: Text('Go to accelometer graph'),
           ),
         ],
       ),
